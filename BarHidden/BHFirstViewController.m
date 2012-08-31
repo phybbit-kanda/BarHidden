@@ -14,12 +14,13 @@
 
 @implementation BHFirstViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil barHiddenDelegate:(id <BHBarHiddenDelegate>)aDelegate 
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 		self.title = NSLocalizedString(@"First", @"First");
 		self.tabBarItem.image = [UIImage imageNamed:@"first"];
+		mBarHiddenDelegate = aDelegate;
     }
     return self;
 }
@@ -28,10 +29,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+	[mScrollView setContentSize:CGSizeMake(mScrollView.contentSize.width, mScrollView.contentSize.height*3)];
+	mScrollView.scrollEnabled = YES;
+	mScrollView.bounces = YES;
 }
 
 - (void)viewDidUnload
 {
+	mScrollView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -40,5 +45,11 @@
 {
 	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
-
+BOOL test = YES;
+- (IBAction)BarHiddenButton:(id)sender {
+	[self.navigationController setNavigationBarHidden:test animated:YES];
+//	[mBarHiddenDelegate setBarHidden:test animated:YES];
+	[mBarHiddenDelegate setBarHidden:test animated:YES withScrollView:mScrollView];
+	test = !test;
+}
 @end

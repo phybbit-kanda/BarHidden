@@ -44,6 +44,7 @@
 		BF6D463515EE070400ECEE07 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		BF6D463815EE070400ECEE07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BHFirstViewController.xib; sourceTree = "<group>"; };
 		BF6D463B15EE070400ECEE07 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BHSecondViewController.xib; sourceTree = "<group>"; };
+		BF6D464215EE076600ECEE07 /* BHBarHiddenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BHBarHiddenDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 				BF6D463715EE070400ECEE07 /* BHFirstViewController.xib */,
 				BF6D463A15EE070400ECEE07 /* BHSecondViewController.xib */,
 				BF6D461E15EE070400ECEE07 /* Supporting Files */,
+				BF6D464215EE076600ECEE07 /* BHBarHiddenDelegate.h */,
 			);
 			path = BarHidden;
 			sourceTree = "<group>";
@@ -279,6 +281,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BarHidden/BarHidden-Prefix.pch";
 				INFOPLIST_FILE = "BarHidden/BarHidden-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -290,6 +293,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BarHidden/BarHidden-Prefix.pch";
 				INFOPLIST_FILE = "BarHidden/BarHidden-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

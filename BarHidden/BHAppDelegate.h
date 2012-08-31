@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface BHAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+#import "BHBarHiddenDelegate.h"
+@interface BHAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate,BHBarHiddenDelegate>{
+	
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface BHFirstViewController : UIViewController
-
+#import "BHBarHiddenDelegate.h"
+@interface BHFirstViewController : UIViewController<UIScrollViewDelegate>
+{
+	
+	__weak IBOutlet UIScrollView *mScrollView;
+	id <BHBarHiddenDelegate> mBarHiddenDelegate;
+}
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil barHiddenDelegate:(id <BHBarHiddenDelegate>)aDelegate;
+- (IBAction)BarHiddenButton:(id)sender;
 @end

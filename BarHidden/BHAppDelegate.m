@@ -18,12 +18,16 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-	UIViewController *viewController1 = [[BHFirstViewController alloc] initWithNibName:@"BHFirstViewController" bundle:nil];
+	UIViewController *viewController1 = [[BHFirstViewController alloc] initWithNibName:@"BHFirstViewController" bundle:nil barHiddenDelegate:self];
+	
+	UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:viewController1];
 	UIViewController *viewController2 = [[BHSecondViewController alloc] initWithNibName:@"BHSecondViewController" bundle:nil];
 	self.tabBarController = [[UITabBarController alloc] init];
-	self.tabBarController.viewControllers = @[viewController1, viewController2];
+	self.tabBarController.viewControllers = @[nav, viewController2];
 	self.window.rootViewController = self.tabBarController;
+//	[self.tabBarController.tabBar setAlpha:0.2];
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
@@ -67,5 +71,123 @@
 {
 }
 */
+BOOL hiddenTabBar = NO;
+- (void)setBarHidden:(BOOL)hidden animated:(BOOL)animated{
+	
+	hiddenTabBar = hidden;
+	
+	if(!hidden){
+	
+	for(UIView *view in _tabBarController.view.subviews)
+	{
+		CGRect _rect = view.frame;
+		if([view isKindOfClass:[UITabBar class]])
+		{
+		} else {
+			if (!hiddenTabBar) {
+				_rect.origin.y=-44;
+				_rect.size.height = 480+44;
+				[view setFrame:_rect];
+			} 
+		}
+	}
+	
+	}
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.2];
+	for(UIView *view in _tabBarController.view.subviews)
+	{
+		CGRect _rect = view.frame;
+		if([view isKindOfClass:[UITabBar class]])
+		{
+			if (!hidden) {
+				_rect.origin.y = 431;
+				[view setFrame:_rect];
+			} else {
+				_rect.origin.y = 480;
+				[view setFrame:_rect];
+			}
+		}
+	}
+	if(!hidden)[self endHidden];
+//		[UIView setAnimationDidStopSelector:@selector(endHidden2)];
+	[UIView commitAnimations];
+	if(hidden)[self endHidden];
+	
+}
 
+- (void)setBarHidden:(BOOL)hidden animated:(BOOL)animated withScrollView:(UIScrollView*)scrollView{
+	
+	hiddenTabBar = hidden;
+	
+	//Barを表示する場合のMainViewのアニメーション開始位置
+	if(!hidden&&animated){
+		for(UIView *view in _tabBarController.view.subviews)
+		{
+			CGRect _rect = view.frame;
+			if(![view isKindOfClass:[UITabBar class]])
+			{
+				if (!hiddenTabBar) {
+					_rect.origin.y=-44;
+					_rect.size.height = 480+44;
+					[view setFrame:_rect];
+				}
+			}
+		}
+		
+	}
+	if(animated){
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.2];
+	}
+	//ScrollViewのサイズを変更
+	if(hidden){
+		CGRect _rect = scrollView.frame;
+		_rect.size.height = 480;
+		[scrollView setFrame:_rect];
+	} else {
+		CGRect _rect = scrollView.frame;
+		_rect.size.height = 431;
+		[scrollView setFrame:_rect];
+	}
+	
+	//TabBarの位置を変更
+	for(UIView *view in _tabBarController.view.subviews)
+	{
+		CGRect _rect = view.frame;
+		if([view isKindOfClass:[UITabBar class]])
+		{
+			if (!hidden) {
+				_rect.origin.y = 431;
+				[view setFrame:_rect];
+			} else {
+				_rect.origin.y = 480;
+				[view setFrame:_rect];
+			}
+		}
+	}
+	if(!hidden)[self endHidden];
+	[UIView commitAnimations];
+	if(hidden)[self endHidden];
+}
+
+//mainviewのサイズを変更
+- (void)endHidden{
+	for(UIView *view in _tabBarController.view.subviews)
+	{
+		CGRect _rect = view.frame;
+		if(![view isKindOfClass:[UITabBar class]])
+		 {
+			if (!hiddenTabBar) {
+				_rect.origin.y=0;
+				_rect.size.height = 431;
+				[view setFrame:_rect];
+			} else {
+				_rect.size.height = 480;
+				[view setFrame:_rect];
+			}
+		}
+	}
+}
 @end
