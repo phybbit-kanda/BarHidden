@@ -47,7 +47,7 @@
 }
 BOOL test = YES;
 - (IBAction)BarHiddenButton:(id)sender {
-	[self.navigationController setNavigationBarHidden:test animated:YES];
+	[self.navigationController setNavigationBarHidden:test animated:test];
 //	[mBarHiddenDelegate setBarHidden:test animated:YES];
 	[mBarHiddenDelegate setBarHidden:test animated:YES withScrollView:mScrollView];
 	test = !test;
